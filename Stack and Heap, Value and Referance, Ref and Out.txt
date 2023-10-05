@@ -1,0 +1,116 @@
+using System;
+class Program
+{   static void Main()
+    {
+        int[] myArray = { 1, 2, 3, 4, 5 };
+        Console.WriteLine("evvelki array:");
+        PrintArray(myArray);
+
+        int[] modArray = InsertArray(myArray, 6, 7, 8,12,13,56);
+        Console.WriteLine("\n Yenilenmiş array:");
+        PrintArray(modArray);
+    }
+
+    static int[] InsertArray(int[] array, params int[] num)
+    {
+        int newArrayLength = array.Length + num.Length;
+        int[] newArray = new int[newArrayLength];
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            newArray[i] = array[i];
+        }
+        
+        for (int i = 0; i < num.Length; i++)
+        {
+            newArray[array.Length + i] = num[i];
+        }
+
+        return newArray;
+    }
+
+    static void PrintArray(int[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            Console.Write(array[i] + " ");
+        }
+        Console.WriteLine();
+    }
+
+}
+
+
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*---*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+
+using System;
+
+class Program
+{
+    static double balance = 2999;
+
+    static void ShowBalance()
+    {
+        Console.WriteLine("Balansınız: " + balance + "-AZN") ;
+    }
+
+    static void Withdraw(double amount)
+    {
+        if (amount <= 0)
+        {
+            Console.WriteLine("Sıfırdan böyük mebleği daxil edin.");
+        }
+        else if (amount > balance)
+        {
+            Console.WriteLine("Balansınızda kifayet qeder pul yoxdur.");
+        }
+        else
+        {
+            balance -= amount;
+            Console.WriteLine( amount+"AZN çıxarıldı. Yeni balans:"  + balance + "AZN" );
+        }
+    }
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("\nATM Emeliyyatları:");
+            Console.WriteLine("1 - Balansı göstər");
+            Console.WriteLine("2 - Pul çıxar");
+            Console.WriteLine("0 - Çıxış");
+
+            Console.Write("Emeliyyatı seçin: ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    ShowBalance();
+                    break;
+                case "2":
+                    Console.Write("Çıxarmaq istədiyiniz məbləği daxil edin: ");
+                    double withdrawAmount;
+                    if (double.TryParse(Console.ReadLine(), out withdrawAmount))
+                    {
+                        Withdraw(withdrawAmount);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Düzgün bir mebleğ daxil edin.");
+                    }
+                    break;
+                case "0":
+                    Console.WriteLine("Çıxıldi");
+                    return;
+                default:
+                    Console.WriteLine("Yanlış seçim. ");
+                    break;
+            }
+        }
+    }
+}
+
+
